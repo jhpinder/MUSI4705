@@ -4,6 +4,6 @@ Georgia Tech Music Technology Capstone I
 Members:
 - James Pinder (jhpinder)
 - Eamon Mccoy
-- Jared Henson
+- Jared Henson (JnHenson)
 - Jonathan Brown
 - Connor Greene (Spider-Man)

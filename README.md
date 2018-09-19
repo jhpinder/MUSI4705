@@ -2,7 +2,7 @@
 Georgia Tech Music Technology Capstone I
 
 Members:
-- James Pinder
+- James Pinder (jhpinder)
 - Eamon Mccoy
 - Jared Henson
 - Jonathan Brown

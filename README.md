@@ -4,7 +4,7 @@ Georgia Tech Music Technology Capstone I
 Fall 2018
 
 Members:
-- James Pinder (jhpinder)
+- James Pinder
 - Eamon Mccoy
 - Jared Henson (JnHenson)
 - Jonathan Brown

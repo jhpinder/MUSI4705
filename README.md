@@ -6,6 +6,6 @@ Fall 2018
 Members:
 - James Pinder (jhpinder)
 - Eamon Mccoy
-- Jared Henson
+- Jared Henson (JnHenson)
 - Jonathan Brown
 - Connor Greene (Spider-Man)

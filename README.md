@@ -8,5 +8,5 @@ Members:
 - James Pinder (jhpinder)
 - Eamon Mccoy (eamonmccoy0)
 - Jared Henson (JnHenson)
-- Jonathan Brown
+- Jonathan Brown (jonathanschamberofsecrets)
 - Connor Greene (Spider-Man)

@@ -27,8 +27,13 @@ ul {
     text-align: center;
 }
 .myI {
-    width: 50%;
+    width: 48%;
     image-orientation: from-image;
+}
+.twoUp {
+    width: 48%;
+    image-orientation: from-image;
+    padding: 5px;
 }
 
 </style>
@@ -50,15 +55,21 @@ have a native .stl export function, an extension that allowed SketchUp to export
 <p>To begin the process of modeling the required pieces, we first needed to
 create a model of the wood box and divider grid. This allowed us to design the
 pieces around the actual dimensions of the box before the entire box was
-complete</p>
+complete.</p>
 <h2>MAX/MSP Communication and Sounds:</h2>
 <p><!-- Remove this comment and add your description here Eamon--></p>
 <img src="FILENAME.jpg">
 <h2>MAX/MSP Coding:</h2>
 <p><!-- Remove this comment and add your description here Jonathan--></p>
 <h2>Enclosure Construction:</h2>
-<img class="myI" src="images/grid1.jpg">
-<img class="myI" src="images/grid2.jpg">
+<p>	This section covers a brief overview of the construction of the physical object. This version is made entirely of ½-inch MDF wood. We chose between plywood and MDF for our prototype due to their cheap and abundant nature; as well they are easily worked with using the tools we had available to us. Ultimately we went with the ½-inch MDF as it was the most cost effective material and its soft, easily manipulated structure for small construction processes. Our choice of material did influence our design in that based on the material available and used would determine our ability to create it. For example, if we had gone with a metal, we would have had to find a way to manipulate it without welding as we had no access to a welding torch. However, since a soft wood was chosen, we could go with something more complex and made up of multiple pieces. Since the crux of our project relies on “stacking” or “building” chords, we needed a compartmental, sectional design. As such, a design similar to that of a fishing “tackle box” was decided on as its basic structure is separate boxes for separate lures and baits. For us, we could modify this design as it is seen now: Eight separate columns each with their own set of one root note “box” and three third note “boxes.”</p>
+<p>Once we had a final design idea, we had to mock-up how we could create this partitioned box from the MDF. A five-faced, open top box seemed the most logical as it offered a stable structure while allowing for a place for our note blocks without having to add a lifting top or any such surface. These five faces were simply made of the MDF wood and nailed together with decking screws to create the shell of the box. The inside is where it got more complicated. We wanted to make equally partitioned spaces for third blocks and root blocks, however we wanted to spaces for root blocks to be visually different from the third blocks as to make a visual representation of their importance. This was achieved in the form of the root note blocks being larger than the third blocks, meaning the spaces for the root note had to be larger than the third notes. As our box was to be an eight column by 4 row grid, we now had to create one row larger than the others while keeping the other three the same. Ultimately we created our grid by creating an interlocking, modular “lattice” of MDF strips. These strips were created with a table saw and a custom jig, a “pattern” for a specific width and height you want cut from a piece of wood. Finally, we simply placed this lattice inside the box to achieve the “tackle box” look we were going for. The last step in construction was to drill holes inside of the lattice so that wires from each column could remain partitioned off from other columns, but ultimately meet so they would be connected to the other rows. This was done be drilling holes into each column from the top down, but then extra holes across the width of the board on the lowest row. This was done to give the wires one singular path from the board, to the Arduino.</p>
+<div class="row" align="center">
+    <div class="column">
+        <img class="twoUp" src="images/grid1.jpg">
+        <img class="twoUp" src="images/grid2.jpg">
+    </div>
+</div>
 <p><!-- Remove this comment and add your description here Connor--></p>
 <h2>Arduino Coding:</h2>
 <p><!-- Remove this comment and add your description here Jared--></p>

@@ -1,3 +1,4 @@
+#include <Adafruit_NeoPixel.h>
 //board pin arrays
 int majPins[][8] ={ {2,8,22,28,34,40,46,52},
                     {4,10,24,30,36,42,48,14},
@@ -9,10 +10,23 @@ int minPins[][8] ={ {3,9,23,29,35,41,47,53},
                   };
                  
 
+
+
+//initialize NeoPixel
+
+Adafruit_NeoPixel pix0 = Adafruit_NeoPixel(7, A12, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pix1 = Adafruit_NeoPixel(8, A13, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pix2 = Adafruit_NeoPixel(8, A14, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pix3 = Adafruit_NeoPixel(8, A15, NEO_RGB + NEO_KHZ800);
+
+
 void setup() {
 
 Serial.begin(9600);
-
+pinMode(A12,OUTPUT);
+pinMode(A13,OUTPUT);
+pinMode(A14,OUTPUT);
+pinMode(A15,OUTPUT);
 //initializing all maj pins
 for (int thismajRow=0; thismajRow < 3; thismajRow++) {  
   for (int thismajPin = 0; thismajPin < 8; thismajPin++) {
@@ -32,12 +46,28 @@ for (int thisminRow=0; thisminRow <3; thisminRow++) {
   }
 }
 
+pix0.begin();
+pix0.setBrightness(50);
+pix0.show();
+pix1.begin();
+pix1.setBrightness(50);
+pix1.show();
+pix2.begin();
+pix2.setBrightness(50);
+pix2.show();
+pix3.begin();
+pix3.setBrightness(50);
+pix3.show();
+
+
 
 }
 int currentRoot;
 int BPM = 90;
 int dvalue = 60000/BPM;
 
+uint32_t maj3 = pix1.Color(255,20,193);
+uint32_t min3 = pix1.Color(0,147,187);
 void loop() {
 
 //for loop to sequence one pass through 8 steps
@@ -104,6 +134,49 @@ for (int seqNo = 0; seqNo < 2; seqNo++) {
 
  
     }
+
+    //NeoPixel time
+  if (seqNo == 0) { //turning off last col of pixels
+    pix0.setPixelColor(1,0,0,0);
+    pix1.setPixelColor(1,0,0,0);
+    pix2.setPixelColor(1,0,0,0);
+    pix3.setPixelColor(1,0,0,0);
+  } else {
+    pix0.setPixelColor(seqNo - 1,0,0,0);
+    pix1.setPixelColor(seqNo - 1,0,0,0);
+    pix2.setPixelColor(seqNo - 1,0,0,0);
+    pix3.setPixelColor(seqNo - 1,0,0,0);
+  }
+
+  //turning on this col of pixels
+  if (intervalArr[0] == 3) {
+    pix1.setPixelColor(seqNo,min3);
+  } else if (intervalArr[0] == 4) {
+    pix1.setPixelColor(seqNo,maj3);
+  } else if (intervalArr[0] == 0) {
+    pix1.setPixelColor(seqNo,200,200,200);
+  }
+  
+  if (intervalArr[1] == 3) {
+    pix2.setPixelColor(seqNo,min3);
+  } else if (intervalArr[1] == 4) {
+    pix2.setPixelColor(seqNo,maj3);
+  } else if (intervalArr[1] == 0) {
+    pix2.setPixelColor(seqNo,200,200,200);
+  }
+
+  if (intervalArr[2] == 3) {
+    pix3.setPixelColor(seqNo,min3);
+  } else if (intervalArr[2] == 4) {
+    pix3.setPixelColor(seqNo,maj3);
+  } else if (intervalArr[2] == 0) {
+    pix3.setPixelColor(seqNo,200,200,200);
+  }
+  
+  pix0.show();
+  pix1.show();
+  pix2.show();
+  pix3.show();
   Serial.println(output);
   delay(dvalue);
     

@@ -66,8 +66,9 @@ int currentRoot;
 int BPM = 90;
 int dvalue = 60000/BPM;
 
-uint32_t maj3 = pix1.Color(255,20,193);
-uint32_t min3 = pix1.Color(0,147,187);
+uint32_t maj3 = pix1.Color(255,20,100);
+uint32_t min3 = pix1.Color(0,0,250);
+uint32_t fifth = pix1.Color(0,250,0);
 void loop() {
 
 //for loop to sequence one pass through 8 steps
@@ -153,24 +154,30 @@ for (int seqNo = 0; seqNo < 2; seqNo++) {
     pix1.setPixelColor(seqNo,min3);
   } else if (intervalArr[0] == 4) {
     pix1.setPixelColor(seqNo,maj3);
+  } else if (intervalArr[0] == 7) {
+    pix1.setPixelColor(seqNo,fifth);
   } else if (intervalArr[0] == 0) {
-    pix1.setPixelColor(seqNo,200,200,200);
+    pix1.setPixelColor(seqNo,100,100,100);
   }
   
   if (intervalArr[1] == 3) {
     pix2.setPixelColor(seqNo,min3);
   } else if (intervalArr[1] == 4) {
     pix2.setPixelColor(seqNo,maj3);
+  } else if (intervalArr[1] == 7) {
+    pix2.setPixelColor(seqNo,fifth);
   } else if (intervalArr[1] == 0) {
-    pix2.setPixelColor(seqNo,200,200,200);
+    pix2.setPixelColor(seqNo,100,100,100);
   }
 
   if (intervalArr[2] == 3) {
     pix3.setPixelColor(seqNo,min3);
   } else if (intervalArr[2] == 4) {
     pix3.setPixelColor(seqNo,maj3);
+  } else if (intervalArr[2] == 7) {
+    pix3.setPixelColor(seqNo,fifth);
   } else if (intervalArr[2] == 0) {
-    pix3.setPixelColor(seqNo,200,200,200);
+    pix3.setPixelColor(seqNo,100,100,100);
   }
   
   pix0.show();

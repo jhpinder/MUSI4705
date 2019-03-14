@@ -10,9 +10,15 @@ int minPins[][8] ={ {3,9,23,29,35,41,47,53},
                     {7,13,27,33,39,45,51,17},
                   };
                  
+Adafruit_NeoPixel pix0 = Adafruit_NeoPixel(7, A12, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pix1 = Adafruit_NeoPixel(8, A13, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pix2 = Adafruit_NeoPixel(8, A14, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pix3 = Adafruit_NeoPixel(8, A15, NEO_RGB + NEO_KHZ800);
 
-uint32_t maj3 = pix1.Color(255,162,193);
-uint32_t min3 = pix1.Color(0,147,187);
+uint32_t maj3 = pix1.Color(0,255,0);
+uint32_t min3 = pix1.Color(0,0,255);
+
+int colNo = 3;
 
 void setup() {
 
@@ -36,15 +42,11 @@ for (int thisminRow=0; thisminRow <3; thisminRow++) {
     //Serial.println(" activated!");
   }
 }
-//initialize NeoPixel
+//initialize NeoPixel pins
 pinMode(A12,OUTPUT);
 pinMode(A13,OUTPUT);
 pinMode(A14,OUTPUT);
 pinMode(A15,OUTPUT);
-Adafruit_NeoPixel pix0 = Adafruit_NeoPixel(7, A12, NEO_RGB + NEO_KHZ800);
-Adafruit_NeoPixel pix1 = Adafruit_NeoPixel(8, A13, NEO_RGB + NEO_KHZ800);
-Adafruit_NeoPixel pix2 = Adafruit_NeoPixel(8, A14, NEO_RGB + NEO_KHZ800);
-Adafruit_NeoPixel pix3 = Adafruit_NeoPixel(8, A15, NEO_RGB + NEO_KHZ800);
 
 pix0.begin();
 pix0.setBrightness(50);
@@ -64,33 +66,34 @@ pix3.show();
 void loop() {
 
 //for loop to sequence one pass through 8 steps
-//for (int seqNo = 0; seqNo < 2;) {
-  int seqNo=0;
+for (int seqNo = 0; seqNo < colNo; seqNo++) {
   int currentRoot = 60;
-  if (seqNo == 0) {
-    int currentRoot = 60;//could be variable with input device
+  //ohmmeter variables
+  int Vin=5;
+  float Vout=0;
+  float R1=470;//knownvalue
+  float R2=0;//testvalue
+  int a2d_data=0;
+  float buffer=0;
+    
+  //resistorID code
+  a2d_data=analogRead(seqNo-1);//will need to be replaced with appropriate pin
+  buffer=a2d_data*Vin;
+  Vout=(buffer)/1024.0;
+  buffer=Vout/(Vin-Vout); 
+  R2=R1*buffer;
+ 
+  if (R2 > 140 && R2 < 160) 
+  {
+    currentRoot = 62;
   }
 
-  else {
-    
-    //ohmmeter variables
-    int Vin=5;
-    float Vout=0;
-    float R1=2200;//knownvalue
-    float R2=0;//testvalue
-    int a2d_data=0;
-    float buffer=0;
-    
-    //resistorID code
-    a2d_data=analogRead(A0);//will need to be replaced with appropriate pin
-    buffer=a2d_data*Vin;
-    Vout=(buffer)/1024.0;
-    buffer=Vout/(Vin-Vout); 
-    R2=R1*buffer;
-    
-    //Serial.println(R2);
-
+  else if (R2 > 480000)
+  {
+    currentRoot = 60;
   }
+
+ 
 
   
   //array containing binary read from columns, laid out maj,min in the order they appear on the board
@@ -128,10 +131,10 @@ void loop() {
     }
   //NeoPixel time
   if (seqNo == 0) { //turning off last col of pixels
-    pix0.setPixelColor(1,0,0,0);
-    pix1.setPixelColor(1,0,0,0);
-    pix2.setPixelColor(1,0,0,0);
-    pix3.setPixelColor(1,0,0,0);
+    pix0.setPixelColor(colNo - 1,0,0,0);
+    pix1.setPixelColor(colNo - 1,0,0,0);
+    pix2.setPixelColor(colNo - 1,0,0,0);
+    pix3.setPixelColor(colNo - 1,0,0,0);
   } else {
     pix0.setPixelColor(seqNo - 1,0,0,0);
     pix1.setPixelColor(seqNo - 1,0,0,0);
@@ -145,7 +148,7 @@ void loop() {
   } else if (intervalArr[0] == 4) {
     pix1.setPixelColor(seqNo,maj3);
   } else if (intervalArr[0] == 0) {
-    pix1.setPixelColor(seqNo,255,255,255);
+    pix1.setPixelColor(seqNo,240,255,200);
   }
   
   if (intervalArr[1] == 3) {
@@ -153,7 +156,7 @@ void loop() {
   } else if (intervalArr[1] == 4) {
     pix2.setPixelColor(seqNo,maj3);
   } else if (intervalArr[1] == 0) {
-    pix2.setPixelColor(seqNo,255,255,255);
+    pix2.setPixelColor(seqNo,240,255,200);
   }
 
   if (intervalArr[2] == 3) {
@@ -161,7 +164,7 @@ void loop() {
   } else if (intervalArr[2] == 4) {
     pix3.setPixelColor(seqNo,maj3);
   } else if (intervalArr[2] == 0) {
-    pix3.setPixelColor(seqNo,255,255,255);
+    pix3.setPixelColor(seqNo,240,255,200);
   }
   
   pix0.show();
@@ -174,17 +177,20 @@ void loop() {
     
     
                          
-
-
-//} 
-
-
-
-
 }
 
 
+} 
+
+
+
+
+
+
+
   
+
+
 
 
 

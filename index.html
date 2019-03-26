@@ -56,10 +56,11 @@ ul {
 <p>The goal of this project was to create an interactive and educational tool to help people understand chord voicings. The idea was to have a grid where the bottom row corresponds to the root note of the chord and then you have the option to stack minor thirds and major thirds on top. There would be eight columns for the option to have an eight chord progression that continuously loops. Placing blocks in each grid space on the bottom row, moves the root note up or down, and placing blocks in the space above, adds major or minor thirds to the corresponding root note. Changing these blocks around is very easy and allows the user to understand the interactions between these chord voicings and try and make recognizeable or creative chord progressions. There is variation in the timbre of the sounds as well as the tempo. There is a potentiometer on the board that allows you to change the tempo to make the chord progressions faster or slower. We have chosen five timbres that we feel are representative of a variety of genres of music. There is piano, electric guitar, synthesizer, banjo, and rhodes piano. In the future we aim to have this be our area of data collection. We are looking to find out if, given one of these instruments that is representative of a certain genre, are people likely to create chord progressions in the style of that genre?
 <h2>Members and Assigned Tasks:</h2>
 <ul>
-    <li>James Pinder: 3D Modeling/Printing</li>
-    <li>Eamon McCoy & Jonathan Brown: MAX/MSP Communication and Sounds</li>
-    <li>Connor Greene: Enclosure Construction</li>
-    <li>Jared Henson: Arduino Coding</li>
+    <li>James Pinder: 3D Modeling/Printing, Board Wiring</li>
+    <li>Eamon McCoy: MAX/MSP Communication and Sounds, Data Collection</li>
+    <li>Jonathan Brown: MAX/MSP Communication and Sounds, Painting, Tonnetz Interfacing</li>
+    <li>Connor Greene: Enclosure Construction, Painting</li>
+    <li>Jared Henson: Arduino Coding, Board Wiring</li>
 </ul>
 <h2>Arduino Coding:</h2>
 <p>When considering the electronic design of this project, note blocks and major or minor third intervals needed to be activated when the respective pieces were placed on the board. Initially, embedded RFID readers were considered for use across all game pieces, as the unique IDs assigned to each scannable tag were ideal for creating discrete functional pieces. After testing, this technology proved to be too unreliable for a number of reasons: SPI communication issues between multiple consecutive readers, failure to consistently identify tags of differing type, and failure to read correctly when tags were left in place on the reader. As the major and minor third pieces effectively read in a binary state, digital switches were chosen to be used as the method of activation. Upon further testing with the note block designs, it was determined that a single block could be used to actuate major and minor third switches depending on the orientation of the block on the interval slot. A two switch design was then implemented, with each interval square on the board possessing two switches, one for each interval combination.</p>
@@ -106,5 +107,9 @@ complete. The first draft of the box is shown in the image below:
 <p>The bottom of the bass block model is shown in the image below:</p>
 <img style="width:420px;padding-left:20px" src="images/bassBlock.jpg">
 <p>As shown in the two previous images, the holes are aligned perpendicular to each other, allowing for copper tape to be applied through the holes and to create closed circuit through a resistor inside each block.</p>
+<h2>Painting:</h2>
+<h2>Board Wiring:</h2>
+<h2>Data Collection:</h2>
+<h2>Tonnetz Interfacing:</h2>
 </body>
 </html>

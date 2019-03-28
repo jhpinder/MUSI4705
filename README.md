@@ -10,3 +10,5 @@ Members:
 - Jared Henson (JnHenson)
 - Jonathan Brown (jonathanschamberofsecrets)
 - Connor Greene (Spider-Man)
+
+Link to github pages: https://jhpinder.github.io/MUSI4705/

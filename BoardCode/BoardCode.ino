@@ -21,6 +21,8 @@ uint32_t maj3 = pix1.Color(0,255,0);
 uint32_t min3 = pix1.Color(0,0,255);
 
 int colNo = 8 ;
+int tempo;
+int inst;
 
 void setup() {
 
@@ -44,6 +46,9 @@ for (int thisminRow=0; thisminRow <3; thisminRow++) {
     //Serial.println(" activated!");
   }
 }
+pinMode(A7,INPUT);
+pinMode(A8,INPUT);
+
 //initialize NeoPixel pins
 //pinMode(A12,OUTPUT);
 pinMode(A13,OUTPUT);
@@ -66,6 +71,9 @@ pix3.show();
 }
 
 void loop() {
+  tempo = map(analogRead(A7), 0, 1023, 300, 1000);
+  inst = map(analogRead(A8), 0, 1023, 0, 5);
+  
 
 //for loop to sequence one pass through 8 steps
 for (int seqNo = 0; seqNo < colNo; seqNo++) {
@@ -205,7 +213,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   pix3.show();
   
   Serial.println(output);
-  delay(500);
+  delay(tempo);
     
     
                          

@@ -24,6 +24,10 @@ int colNo = 8 ;
 int tempo;
 int inst;
 
+int dumpCD = 0;
+String currOut;
+String lastOut;
+
 void setup() {
 
 Serial.begin(9600);
@@ -55,6 +59,9 @@ pinMode(A13,OUTPUT);
 pinMode(A14,OUTPUT);
 pinMode(A15,OUTPUT);
 
+//dump button
+pinMode(16,INPUT_PULLUP);
+
 //pix0.begin();
 //pix0.setBrightness(50);
 //pix0.show();
@@ -71,12 +78,19 @@ pix3.show();
 }
 
 void loop() {
-  tempo = map(analogRead(A7), 0, 1023, 300, 1000);
-  inst = map(analogRead(A8), 0, 1023, 0, 5);
-  
+  lastOut = currOut;
+  currOut = "";
+  //Serial.println(lastOut);
+  if (!digitalRead(16)) {
+    dump();
+    return;
+  }
 
 //for loop to sequence one pass through 8 steps
 for (int seqNo = 0; seqNo < colNo; seqNo++) {
+  tempo = map(analogRead(A7), 0, 1023, 100, 1000);
+  inst = map(analogRead(A8), 0, 1023, 0, 5);
+  
   int currentRoot = 60;
   //ohmmeter variables
   int Vin=5;
@@ -155,8 +169,8 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   String finalString[4] = {String(currentRoot)};
   String output = String(currentRoot);
   int count = 1;
-  for (int i=0;i<3;i++)
-    {
+  int zerocount = 0;
+  for (int i=0;i<3;i++) {
       int currentSel = intervalArr[i];
       
       if (currentSel!= 0)
@@ -165,10 +179,17 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
         finalString[count] = String(add);
         output = output + " " + finalString[count];
         count = count + 1;
+      } else {
+        zerocount++;
       }
 
- 
+  } 
+    currOut = currOut + " " + output;
+    for (int i = 0; i < zerocount; i++) {
+      currOut = currOut + " 00";
+      output = output + " 00";
     }
+    output = output + " " + inst;
   //NeoPixel time
   if (seqNo == 0) { //turning off last col of pixels
     //pix0.setPixelColor(colNo - 1,0,0,0);
@@ -214,7 +235,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   
   Serial.println(output);
   delay(tempo);
-    
+    dumpCD++;
     
                          
 }
@@ -225,7 +246,14 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
 
 
 
-
+void dump() {
+  if (dumpCD < 8) {
+    return;
+  }
+  String output = "0 0 0 0 0 1 " + lastOut;
+  Serial.println(output);
+  delay(2000);
+}
 
 
   

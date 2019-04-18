@@ -112,37 +112,37 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   R2=R1*buffer;
 
   isEmpty = false;
-  if (R2 > 40 && R2 < 54) //1
+  if (R2 > 30 && R2 < 65) //1
   {
     currentRoot = 60;
   }
   
-  else if (R2 > 140 && R2 < 160) //2
+  else if (R2 > 135 && R2 < 170) //2
   {
     currentRoot = 62;
   }
 
-  else if (R2 > 258 && R2 < 275) //3
+  else if (R2 > 250 && R2 < 285) //3
   {
     currentRoot = 64;
   }
 
-  else if (R2 > 318 && R2 < 330) //4
+  else if (R2 > 310 && R2 < 340) //4
   {
     currentRoot = 65;
   }
 
-  else if (R2 > 500 && R2 < 515) //5
+  else if (R2 > 490 && R2 < 525) //5
   {
     currentRoot = 67;
   }
 
-  else if (R2 > 665 && R2 < 685) //6
+  else if (R2 > 655 && R2 < 695) //6
   {
     currentRoot = 69;
   }
 
-  else if (R2 > 1900 && R2 < 2100) //7
+  else if (R2 > 1890 && R2 < 2150) //7
   {
     currentRoot = 71;
   }

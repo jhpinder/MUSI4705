@@ -66,6 +66,9 @@ pinMode(A15,OUTPUT);
 //dump button
 pinMode(15,INPUT_PULLUP);
 
+pinMode(14,INPUT_PULLUP);
+pinMode(16,INPUT_PULLUP);
+
 //pix0.begin();
 //pix0.setBrightness(50);
 //pix0.show();
@@ -82,16 +85,21 @@ pix3.show();
 }
 
 void loop() {
+  
   lastOut = currOut;
   currOut = "";
   //Serial.println(lastOut);
+  
+
+//for loop to sequence one pass through 8 steps
+for (int seqNo = 0; seqNo < colNo; seqNo++) {
+  if (digitalRead(16)) {
+    return;
+  }
   if (!digitalRead(15)) {
     dump();
     return;
   }
-
-//for loop to sequence one pass through 8 steps
-for (int seqNo = 0; seqNo < colNo; seqNo++) {
   tempo = map(analogRead(A7), 0, 1023, 100, 1000);
   inst = map(analogRead(A8), 0, 1023, 0, 5);
   
@@ -112,39 +120,51 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   R2=R1*buffer;
 
   isEmpty = false;
-  if (R2 > 30 && R2 < 65) //1
+  if (R2 > 40 && R2 < 54) //1
   {
     currentRoot = 60;
   }
   
-  else if (R2 > 135 && R2 < 170) //2
+  else if (R2 > 140 && R2 < 160) //2
   {
     currentRoot = 62;
   }
 
-  else if (R2 > 250 && R2 < 285) //3
+  else if (R2 > 258 && R2 < 275) //3
   {
+    if (digitalRead(14)) {
     currentRoot = 64;
+    } else {
+      currentRoot = 63;
+    }
   }
 
-  else if (R2 > 310 && R2 < 340) //4
+  else if (R2 > 318 && R2 < 330) //4
   {
     currentRoot = 65;
   }
 
-  else if (R2 > 490 && R2 < 525) //5
+  else if (R2 > 500 && R2 < 515) //5
   {
     currentRoot = 67;
   }
 
-  else if (R2 > 655 && R2 < 695) //6
+  else if (R2 > 665 && R2 < 685) //6
   {
-    currentRoot = 69;
+    if (digitalRead(14)) {
+    currentRoot = 68;
+    } else {
+      currentRoot = 69;
+    }
   }
 
-  else if (R2 > 1890 && R2 < 2150) //7
+  else if (R2 > 1900 && R2 < 2100) //7
   {
-    currentRoot = 71;
+    if (digitalRead(14)) {
+    currentRoot = 70;
+    } else {
+      currentRoot = 71;
+    }
   }
 
 

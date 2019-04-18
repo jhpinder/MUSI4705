@@ -155,7 +155,6 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
     currentRoot = 60;
   }
 
-//Serial.println(analogRead(seqNo - 1));
 
   
   //array containing binary read from columns, laid out maj,min in the order they appear on the board

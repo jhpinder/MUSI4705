@@ -265,9 +265,9 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
 
 
 void dump() {
-  if (dumpCD < 8) {
-    return;
-  }
+//  if (dumpCD < 8) {
+//    return;
+//  }
   String output = "0 0 0 0 0 1 " + lastOut;
   Serial.println(output);
   delay(2000);

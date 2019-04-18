@@ -24,7 +24,10 @@ int colNo = 8 ;
 int tempo;
 int inst;
 
+bool isEmpty = false;
 int dumpCD = 0;
+int lastR = 60;
+int lastNotes[] = {0,0,0};
 String currOut;
 String lastOut;
 
@@ -106,7 +109,8 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   Vout=(buffer)/1024.0;
   buffer=Vout/(Vin-Vout); 
   R2=R1*buffer;
-  
+
+  isEmpty = false;
   if (R2 > 40 && R2 < 54) //1
   {
     currentRoot = 60;
@@ -142,12 +146,16 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
     currentRoot = 71;
   }
 
-  else if (R2 > 480000)
+  else if (analogRead(seqNo - 1) > 950)
   {
+    currentRoot = lastR;
+    isEmpty = true;
+  }
+  if (seqNo == 0) {
     currentRoot = 60;
   }
 
- 
+//Serial.println(analogRead(seqNo - 1));
 
   
   //array containing binary read from columns, laid out maj,min in the order they appear on the board
@@ -172,7 +180,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   int zerocount = 0;
   for (int i=0;i<3;i++) {
       int currentSel = intervalArr[i];
-      
+        lastNotes[i] = currentSel;
       if (currentSel!= 0)
       {
         int add = finalString[count-1].toInt()+intervalArr[i];
@@ -184,6 +192,9 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
       }
 
   } 
+  if (isEmpty) {
+    
+  }
     currOut = currOut + " " + output;
     for (int i = 0; i < zerocount; i++) {
       currOut = currOut + " 00";
@@ -236,7 +247,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   Serial.println(output);
   delay(tempo);
     dumpCD++;
-    
+    lastR = currentRoot;
                          
 }
 

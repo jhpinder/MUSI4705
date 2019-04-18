@@ -30,6 +30,7 @@ int lastR = 60;
 int lastNotes[] = {0,0,0};
 String currOut;
 String lastOut;
+String lastColOut;
 
 void setup() {
 
@@ -63,7 +64,7 @@ pinMode(A14,OUTPUT);
 pinMode(A15,OUTPUT);
 
 //dump button
-pinMode(16,INPUT_PULLUP);
+pinMode(15,INPUT_PULLUP);
 
 //pix0.begin();
 //pix0.setBrightness(50);
@@ -84,7 +85,7 @@ void loop() {
   lastOut = currOut;
   currOut = "";
   //Serial.println(lastOut);
-  if (!digitalRead(16)) {
+  if (!digitalRead(15)) {
     dump();
     return;
   }
@@ -146,15 +147,17 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
     currentRoot = 71;
   }
 
-  else if (analogRead(seqNo - 1) > 950)
+
+  else if (analogRead(seqNo - 1) > 900)
   {
-    currentRoot = lastR;
-    isEmpty = true;
+    currentRoot = 0;
+    if (seqNo != 0) {
+      isEmpty = true;
+    }
   }
   if (seqNo == 0) {
     currentRoot = 60;
   }
-
 
   
   //array containing binary read from columns, laid out maj,min in the order they appear on the board
@@ -191,15 +194,19 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
       }
 
   } 
-  if (isEmpty) {
-    
-  }
+
     currOut = currOut + " " + output;
     for (int i = 0; i < zerocount; i++) {
       currOut = currOut + " 00";
       output = output + " 00";
     }
+     if (isEmpty) {
+    output = lastColOut;
+    //currOut = lastColOut;
+     }
+     String outNoInst = output;
     output = output + " " + inst;
+ 
   //NeoPixel time
   if (seqNo == 0) { //turning off last col of pixels
     //pix0.setPixelColor(colNo - 1,0,0,0);
@@ -247,6 +254,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   delay(tempo);
     dumpCD++;
     lastR = currentRoot;
+    lastColOut = outNoInst;
                          
 }
 

@@ -1,13 +1,13 @@
 #include <Adafruit_NeoPixel.h>
 
 //board pin arrays
-int majPins[][8] ={ {2,8,22,28,34,40,46,52},
+int majPins[][8] ={ {2,8,22,28,34,40,46,53},
                     {4,10,24,30,36,42,48,A10},
-                    {6,12,26,32,38,44,50,A12},
+                    {6,12,26,32,38,44,50,52},
                   };
 
                   
-int minPins[][8] ={ {3,9,23,29,35,41,47,53},
+int minPins[][8] ={ {3,9,23,29,35,41,47,A12},
                     {5,11,25,31,37,43,49,A9},
                     {7,13,27,33,39,45,51,A11},
                   };
@@ -125,7 +125,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
     currentRoot = 60;
   }
   
-  else if (R2 > 135 && R2 < 170) //2
+  else if (R2 > 135 && R2 < 199) //2
   {
     currentRoot = 62;
   }
@@ -149,18 +149,18 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
     currentRoot = 67;
   }
 
-  else if (R2 > 655 && R2 < 695) //6
+  else if (R2 > 625 && R2 < 695) //6
   {
-    if (digitalRead(14)) {
+    if (!digitalRead(14)) {
     currentRoot = 68;
     } else {
       currentRoot = 69;
     }
   }
 
-  else if (R2 > 1890 && R2 < 2150) //7
+  else if (R2 > 1690 && R2 < 2150) //7
   {
-    if (digitalRead(14)) {
+    if (!digitalRead(14)) {
     currentRoot = 70;
     } else {
       currentRoot = 71;
@@ -178,8 +178,8 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
   if (seqNo == 0) {
     currentRoot = 60;
   }
-
-  
+//Serial.println(R2);
+  //Serial.println(analogRead(seqNo-1));
   //array containing binary read from columns, laid out maj,min in the order they appear on the board
   int switchState[][2] ={ {digitalRead(majPins[0][seqNo]),digitalRead(minPins[0][seqNo])},
                           {digitalRead(majPins[1][seqNo]),digitalRead(minPins[1][seqNo])},
@@ -225,7 +225,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
     //currOut = lastColOut;
      }
      String outNoInst = output;
-    output = output + " " + inst;
+    output = output + " " + inst + " " + tempo;
  
   //NeoPixel time
   if (seqNo == 0) { //turning off last col of pixels

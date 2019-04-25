@@ -101,7 +101,7 @@ for (int seqNo = 0; seqNo < colNo; seqNo++) {
     return;
   }
   tempo = map(analogRead(A7), 0, 1023, 100, 1000);
-  inst = map(analogRead(A8), 0, 1023, 0, 5);
+  inst = map(analogRead(A8), 0, 1023, 0, 7);
   
   int currentRoot = 60;
   //ohmmeter variables

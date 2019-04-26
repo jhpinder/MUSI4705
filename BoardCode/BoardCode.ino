@@ -89,7 +89,6 @@ void loop() {
   lastOut = currOut;
   currOut = "";
   //Serial.println(lastOut);
-  
 
 //for loop to sequence one pass through 8 steps
 for (int seqNo = 0; seqNo < colNo; seqNo++) {
